@@ -18,6 +18,10 @@ public class Car {
     private int maxFuel;
     private int currentFuel;
     private int consumption;
+    private double mileage;
+    private int passengers;
+    private int maxPassinger;
+    
     
    public Car() { 
        this.model = "";
@@ -27,6 +31,10 @@ public class Car {
        this.maxFuel = 0;
        this. currentFuel = 0;
        this.consumption = 0;
+       this.mileage = 0;
+       this.passengers = 1;
+       this.maxPassinger = 0;
+      
    }
    
    public Car (String customModel, int customBuildYear, int customMaxSpeed,
@@ -38,7 +46,8 @@ public class Car {
    }
    
    public Car (String customModel, int customBuildYear, int customMaxSpeed,
-               String customColor, int customMaxFuel, int customCurrentFuel, int customConsumption){
+               String customColor, int customMaxFuel, int customCurrentFuel, 
+               int customConsumption, double customMileage, int customMaxPassinger){
        this.model = customModel;
        this.buildYear = customBuildYear;
        this.maxSpeed = customMaxSpeed;
@@ -46,7 +55,14 @@ public class Car {
        this.currentFuel = customCurrentFuel;
        this.maxFuel = customMaxFuel;
        this.consumption = customConsumption;
+       this.mileage = customMileage;
+       this.maxPassinger = customMaxPassinger;
+       
    }
+
+    Car(String fiat_punto, int i, int i0, String black, int i1, int i2, int i3) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
    
    public String getModel() {
        return this.model;
@@ -108,7 +124,32 @@ public class Car {
        public String getVehicalType(){
            return this.vehicleType;
        }
-        
+       
+       public double getMileage(){
+           return this.mileage;
+       }
+       
+       public void setMileage ( double customMileage){
+           this.mileage = customMileage;
+       }
+       
+      
+       public int getMaxPassinger(){
+           return this.maxPassinger;
+       }
+       
+       public void setMaxPassinger (int customMaxPassinger){
+           this.maxPassinger = customMaxPassinger;
+       }
+       
+       public int getPassengers (){
+           return this.passengers;
+       }
+       
+       public void setPassengers ( int customPassangers){
+           this.passengers = customPassangers;
+       }
+       
         
     public void showData(){
         System.out.println("Model: " + this.getModel());
@@ -117,11 +158,54 @@ public class Car {
         System.out.println("Porosnja: " + this.getConsumption());
         System.out.println("Stanje rezervoara: " + this.getCurrentFuel());
         System.out.println("Kapacitet rezervoara je: " + this.getMaxFuel());
+        System.out.println( "Predjena kilometraza je:" + this.getMileage());
+        
         System.out.println();
         
     }
     
-    public void travel(int distanceTraveled){
+    public void travel(int distance){
+        if (this.getCurrentFuel() > (distance * this.getConsumption ())/100){
+        
+        this.mileage = this.getMileage() + distance;
+        this.currentFuel = this.getCurrentFuel() - (distance * this.getCurrentFuel())/100;
+        } else {
+            System.out.println( "Nema dovoljno goriva za put od:" + distance);
+        }
+    }
+    
+    public void fuelUp (int refill) {
+            
+        this.currentFuel = this.getCurrentFuel() + refill;
+            
+            System.out.println ( " Sipano je dodatno goriva:" + refill);
+        }
+      
+    public void currentFuelState (int fuelState) {
+       if (this.getCurrentFuel() < this.getMaxFuel()) {
+        this.currentFuel = this.getCurrentFuel() + fuelState;
+       
+       System.out.println( "Sispano je goriva" + fuelState);
+    } else { 
+    
+        System.out.println( "Rezervoar je pun!");
+}
+       
+    /**
+     *
+     */
+   // public void getIn () {
+     //      if (this.getPassengers() + 1 <= this.getMaxPassinger()){
+               this.setPassengers (this.getPassengers () + 1);
+    //           System.out.println ("Jedna osoba je usla u auto. N ovo stanje je: " + this.getPassengers ());
+   //        } else {
+    //           System.out.println ( "AUtomobil je pun. Nema mesta za jos jednog putnika");
+     //      }
+       }
+//
+    }
+    
+        
         //definisati novi atribut mileage
         //napraviti get i set metodu
         //prosiriti jeda konstruktor da moze da se setuje i mileage
@@ -131,7 +215,8 @@ public class Car {
         //kilometraza treba da se uvecana
         
         //opciono: novi atribut za stanje motora, da li je automobil ukjucen
-    }
+    
+   
  
     
-}
+
